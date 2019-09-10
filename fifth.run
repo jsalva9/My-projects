@@ -1,0 +1,18 @@
+reset;
+option solver cplex;
+
+model 'C:\Users\jsalv\Desktop\Tria-la\fifth.mod';
+data 'C:\Users\jsalv\Desktop\Tria-la\FR\data.dat';
+
+
+solve;
+display x;
+display {i in caps} pes[i]*(sum {k in unitats, j in caps} x[i,k]*x[j,k]*(si_cocaps[i,j]-no_cocaps[i,j]))
++((1-pes[i])*(sum {k in unitats} x[i,k]*(si_unitats[i,k]-no_unitats[i,k])));
+
+display {k in unitats} sum {j in caps} x[j,k]*musica[j];
+display {k in unitats} sum {j in caps} x[j,k]*muntanya[j];
+display {k in unitats} sum {j in caps} x[j,k]*cotxe[j];
+display {k in unitats} sum {j in caps} x[j,k]*carnet[j];
+display {k in unitats} sum {j in caps} x[j,k]*(carnet[j] div 2);
+
